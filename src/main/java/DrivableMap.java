@@ -22,21 +22,38 @@ class DrivableMap {
         drivable_map = new HashMap<>();
     }
 
-    /* TODO: Write a method named addDrivable that takes a String (the ID)
-     *       and a Drivable object. If the ID string does not appear as a key
-     *       in drivable_map, then add the pair to drivable_map.
-     *       Return true if the Drivable was added to drivable_map.
+    /** Takes a String (the ID) and a Drivable object. If the ID string does not appear as a key
+     *  in drivable_map, then add the pair to drivable_map. Return true if the Drivable was added
+     *  to drivable_map.
+     *
+     * @param ID the ID of the object, also its key in the map
+     *
+     * @param item the item to be added to the map
      */
+    public boolean addDrivable (String ID, Drivable item) {
+        if (!drivable_map.containsKey(ID)) {
+            drivable_map.put(ID, item);
+            return true;
+        }
+        return false;
+    }
 
 
 
 
-    /* TODO: Write a method named hasFasterThan that takes an int (a speed)
-     *       and returns true iff there is at least one item in drivable_map
-     *       that has a maxSpeed >= the speed given.
-     * You may want to use drivable_map.keys() or drivable_map.values() to
-     * iterate through drivable_map.
+    /** Takes an int (a speed) and returns true iff there is at least one item in drivable_map
+     *  that has a maxSpeed >= the speed given.
+     *
+     * @param speed the speed boundary for the comparison
      */
+    public boolean hasFasterThan(int speed) {
+        for (Drivable item: drivable_map.values()) {
+            if (item.getMaxSpeed() >= speed) {
+                return true;
+            }
+        }
+        return false;
+    }
 
 
 
@@ -46,6 +63,15 @@ class DrivableMap {
      *       returns a List containing all of the Tradable items in
      *       drivable_map.
      */
+    public List<Tradable> getTradable() {
+        ArrayList<Tradable> arrlst = new ArrayList<>();
+        for (Drivable item: drivable_map.values()) {
+            if (item instanceof Tradable) {
+                arrlst.add((Tradable) item);
+            }
+        }
+        return arrlst;
+    }
 
 
 
